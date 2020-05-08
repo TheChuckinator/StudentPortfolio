@@ -1,0 +1,139 @@
+/**
+ * This is a simple calculator that will add, subtract, 
+ *  multiply, and divide two numbers and display an answer.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+import static java.lang.Math.*;
+
+public class Calculator extends JFrame
+{
+    // instance variables - replace the example below with your own
+    private JLabel firstL, secondL, answerL; // labels for inputs and answer
+    private JTextField firstI, secondI, answerF; // textfield for inputs and answer
+    private JButton addit, subtr, multi, divide; // buttons
+    
+    private AddButtonHandler abHandler; // addition handler
+    private SubtrButtonHandler sbHandler; // subtraction handler
+    private MultiButtonHandler mbHandler; // multiplication handler
+    private DivideButtonHandler dbHandler; // division handler
+    
+    private static final int WIDTH = 250;
+    private static final int HEIGHT = 400;
+
+    /**
+     * Constructor for objects of class Calculator
+     */
+    public Calculator()
+    {
+        firstL = new JLabel("First Int", SwingConstants.CENTER);
+        secondL = new JLabel("Second Int", SwingConstants.CENTER);
+        answerL = new JLabel("Answer", SwingConstants.CENTER);
+        
+        // initalizing JTextFields
+        firstI = new JTextField(3); 
+        secondI = new JTextField(3);
+        answerF = new JTextField(6);
+        answerF.setEditable(false);
+        
+        // initalizing JButtons
+        addit = new JButton("+");
+        abHandler = new AddButtonHandler();
+        addit.addActionListener(abHandler);
+        
+        subtr = new JButton("-");
+        sbHandler = new SubtrButtonHandler();
+        subtr.addActionListener(sbHandler);
+        
+        multi = new JButton("*");
+        mbHandler = new MultiButtonHandler();
+        multi.addActionListener(mbHandler);
+        
+        divide = new JButton("/");
+        dbHandler = new DivideButtonHandler();
+        divide.addActionListener(dbHandler); 
+        
+        
+        setTitle("Calculator"); // setting title of application
+        //Container megaPane = getContentPane(); // megaPane fits pane1 & pane2
+        //megaPane.setLayout(new GridLayout(2,1)); 
+        Container pane1 = getContentPane(); // pane1 fits labels and input
+        pane1.setLayout(new GridLayout(5,2)); // 2 across, 5 down
+        //Container pane2 = getContentPane(); // pane2 fits buttons
+        //pane2.setLayout(new GridLayout(2,2));
+        
+        // adding components to container
+        pane1.add(firstL);
+        pane1.add(secondL);
+        pane1.add(firstI);
+        pane1.add(secondI);
+        
+        pane1.add(addit);
+        pane1.add(subtr);
+        pane1.add(multi);
+        pane1.add(divide);
+        
+        pane1.add(answerL);
+        pane1.add(answerF);
+        
+        // finish clarifying JFrame properties
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(WIDTH, HEIGHT);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    private class AddButtonHandler implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            double first, second, total;
+            
+            first = Integer.parseInt(firstI.getText()); // gets text input
+            second = Integer.parseInt(secondI.getText()); // gets text input
+            
+            total = first + second;
+            answerF.setText("" + String.format("%.2f", total));
+        }
+    }
+    private class SubtrButtonHandler implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            double first, second, total;
+            
+            first = Integer.parseInt(firstI.getText());
+            second = Integer.parseInt(secondI.getText());
+            
+            total = first - second;
+            answerF.setText("" + String.format("%.2f", total));
+        }
+    }
+    private class MultiButtonHandler implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            double first, second, total;
+            
+            first = Integer.parseInt(firstI.getText());
+            second = Integer.parseInt(secondI.getText());
+            
+            total = first * second;
+            answerF.setText("" + String.format("%.2f", total));
+        }
+    }
+    private class DivideButtonHandler implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            double first, second, total;
+            
+            first = Integer.parseInt(firstI.getText());
+            second = Integer.parseInt(secondI.getText());
+            
+            total = first / second;
+            answerF.setText("" + String.format("%.2f", total));
+        }
+    }
+    
+    public static void main(String[] args )
+    {
+        Calculator calc = new Calculator(); // creates instance of Calculator()
+    }
+}
