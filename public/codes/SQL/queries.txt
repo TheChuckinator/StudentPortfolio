@@ -1,0 +1,22 @@
+SELECT code, description 
+FROM d_themes 
+WHERE code >200 AND description IN('Tropical', 'Football', 'Carnival'); 
+
+SELECT first_name, last_name, salary, staff_type
+FROM f_staffs
+WHERE salary > 6.5 and staff_type != 'Order Taker';
+
+SELECT *
+FROM f_staffs
+WHERE last_name like 'D%' and last_name like '%e%' and last_name like '%a%';
+
+SELECT first_name, last_name, salary
+FROM f_staffs
+WHERE salary between 5 and 10;
+
+UPDATE f_staffs
+SET first_name = Charles, last_name = Link
+WHERE staff_id = 19
+
+INSERT INTO f_staffs (first_name, last_name)
+VALUES (Jeremy, Smith)
